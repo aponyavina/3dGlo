@@ -26,13 +26,16 @@ const sendfForm = () => {
         target.append(statusMessage);
         statusMessage.textContent = loadMessage;
         const formData = new FormData(target);
-        postData(formData)
+        let body = {};
+        formData.forEach((val, key) => {
+            body[key] = val;
+        });
+        postData(body)
             .then((response) => {
                 if (response.status !== 200) {
                     throw new Error('status network not 200');
                 }
                 statusMessage.textContent = successMessage;
-                console.log(response);
                 setTimeout(() => {
                     statusMessage.textContent = '';
                 }, 2000);
@@ -41,17 +44,17 @@ const sendfForm = () => {
                 statusMessage.textContent = errorMessage;
                 console.error(error);
             });
-            for (let i = 0; i < input.length; i++) {
-                input[i].value = '';
-            }
+        for (let i = 0; i < input.length; i++) {
+            input[i].value = '';
+        }
     });
-    const postData = (body) => {
+    const postData = (formData) => {
         return fetch('./server.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body),
+            body: JSON.stringify(formData),
             credentials: 'include'
         });
     }
