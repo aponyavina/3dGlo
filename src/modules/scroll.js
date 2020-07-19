@@ -1,7 +1,6 @@
 const scroll = () => {
     const scrollImg = document.querySelector('.scroll-img'),
         serviceBlock = document.getElementById('service-block'),
-        menuItem = document.querySelectorAll('menu > ul > li > a'),
         scrollToBlock = (block) => {
             block.scrollIntoView({
                 behavior: 'smooth',
@@ -9,13 +8,14 @@ const scroll = () => {
             });
         };
 
-    menuItem.forEach((element) => {
-        const idName = element.getAttribute('href').slice(1);
-        const idBlock = document.getElementById(idName);
-        element.addEventListener('click', (e) => {
-            e.preventDefault();
+    document.body.addEventListener('click', (e) => {
+        e.preventDefault();
+        let target = e.target;
+        if (target.classList.contains('menu-item')) {
+            const idName = target.getAttribute('href').slice(1);
+            const idBlock = document.getElementById(idName);
             scrollToBlock(idBlock);
-        });
+        }
     });
 
     scrollImg.addEventListener('click', (e) => {
