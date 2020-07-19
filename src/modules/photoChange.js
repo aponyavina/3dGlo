@@ -1,14 +1,19 @@
 const photoChange = () => {
-    const img = document.querySelectorAll('.command__photo');
-    img.forEach((item, i) => {
-        item.addEventListener('mouseenter', (e) => {
-            e.target.src = e.target.dataset.img;
-        });
-        item.addEventListener('mouseleave', (e) => {
-            e.target.src = `images/command/command-${i+1}.jpg`;
-        });
+    const command = document.getElementById('command');
+    let srcName;
+    command.addEventListener('mouseover', (e) => {
+        let target = e.target;
+        if (target.classList.contains('command__photo')) {
+            srcName = target.getAttribute('src');
+            target.src = target.dataset.img;
+        }
     });
-
+    command.addEventListener('mouseout', (e) => {
+        let target = e.target;
+        if (target.classList.contains('command__photo')) {
+        target.src = srcName;
+        }
+    });
 };
 
 export default photoChange;

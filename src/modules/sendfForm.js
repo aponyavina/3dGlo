@@ -8,11 +8,20 @@ const sendfForm = () => {
     document.addEventListener('input', (event) => {
         let target = event.target;
         if (target.getAttribute('name') === 'user_phone') {
-            target.value = target.value.replace(/[^0-9+]/g, '');
+            target.value = target.value.replace(/[^\d+]/g, '');
+            if (target.value[0] === '+') {
+                target.value = target.value.slice(0, 12);
+            }
+            if (target.value[0] !== '+') {
+                target.value = target.value.slice(0, 11);
+            }
         }
         if (target.getAttribute('name') === 'user_name' ||
             target.getAttribute('name') === 'user_message') {
             target.value = target.value.replace(/[^а-я ]/gi, '');
+        }
+        if (target.getAttribute('name') === 'user_email') {
+            target.value = target.value.replace(/[а-я ]/gi, '');
         }
     });
 

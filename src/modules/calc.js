@@ -1,10 +1,10 @@
 const calc = (price = 100) => {
-    const numberInputs = document.querySelectorAll('.calc-item');
-    for (let i = 1; i < numberInputs.length; i++) {
-        numberInputs[i].addEventListener('input', () => {
-            numberInputs[i].value = numberInputs[i].value.replace(/[^\d]/g, '');
-        });
-    }
+    document.addEventListener('input', (e) => {
+        let target = e.target;
+        if (target.classList.contains('calc-item') && !target.classList.contains('calc-type')) {
+            target.value = target.value.replace(/[^\d]/g, '');
+        }
+    });
 
     const calcBlock = document.querySelector('.calc-block'),
         calcType = document.querySelector('.calc-type'),

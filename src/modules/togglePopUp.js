@@ -1,10 +1,10 @@
 const togglePopUp = () => {
     const popup = document.querySelector('.popup'),
-        popupBtn = document.querySelectorAll('.popup-btn'),
         popupContent = document.querySelector('.popup-content');
 
-    popupBtn.forEach((elem) => {
-        elem.addEventListener('click', () => {
+    document.addEventListener('click', event => {
+        let target = event.target;
+        if (target.classList.contains('popup-btn')) {
             if (innerWidth >= 768) {
                 let start = Date.now();
                 let timer = setInterval(() => {
@@ -16,7 +16,8 @@ const togglePopUp = () => {
             } else {
                 popup.style.display = 'block';
             }
-        });
+        } else return;
+
     });
     popup.addEventListener('click', (event) => {
         let target = event.target;
