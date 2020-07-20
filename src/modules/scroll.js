@@ -1,6 +1,7 @@
 const scroll = () => {
     const scrollImg = document.querySelector('.scroll-img'),
         serviceBlock = document.getElementById('service-block'),
+        menu = document.getElementById('menu'),
         scrollToBlock = (block) => {
             block.scrollIntoView({
                 behavior: 'smooth',
@@ -8,7 +9,7 @@ const scroll = () => {
             });
         };
 
-    document.body.addEventListener('click', (e) => {
+    menu.addEventListener('click', (e) => {
         e.preventDefault();
         let target = e.target;
         if (target.classList.contains('menu-item')) {
